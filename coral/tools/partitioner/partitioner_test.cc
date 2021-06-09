@@ -83,8 +83,9 @@ TEST_P(ParameterCountBasedPartitionerTest, CheckValidPartition) {
                             ->operators()
                             ->size();
   std::vector<int> expected_union(num_nodes);
+  int n = 0;
   std::generate(expected_union.begin(), expected_union.end(),
-                [n = 0]() mutable { return n++; });
+                [&n]() mutable { return n++; });
   EXPECT_THAT(segments_union,
               testing::UnorderedElementsAreArray(expected_union));
 
@@ -143,9 +144,3 @@ INSTANTIATE_TEST_CASE_P(ParameterCountBasedPartitionerTest,
                                            ::testing::Values(2, 3, 4)));
 }  // namespace
 }  // namespace coral
-
-int main(int argc, char** argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  absl::ParseCommandLine(argc, argv);
-  return RUN_ALL_TESTS();
-}

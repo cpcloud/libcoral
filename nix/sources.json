@@ -1,0 +1,14 @@
+{
+    "nixpkgs": {
+        "branch": "tflite-pkgconfig",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "cpcloud",
+        "repo": "nixpkgs",
+        "rev": "80e8b600db918580d512429133fbc082ab708e94",
+        "sha256": "1npx36zbm9w6x9q6zcb7g9gc2rfcnv56bidhgnx67vbyfxfv7kyq",
+        "type": "tarball",
+        "url": "https://github.com/cpcloud/nixpkgs/archive/80e8b600db918580d512429133fbc082ab708e94.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

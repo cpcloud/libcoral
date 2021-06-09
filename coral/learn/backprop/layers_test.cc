@@ -143,9 +143,9 @@ TEST(FullyConnectedGradientTest, GradientOfSummingElementsOfY) {
 
   std::vector<MatrixXf> outputs =
       FullyConnectedGradient(mat_x, mat_w, vec_b, dmat_y);
-  const auto& dmat_x = outputs[0];
-  const auto& dmat_w = outputs[1];
-  const auto& dvec_b = outputs[2];
+  outputs[0];
+  outputs[1];
+  outputs[2];
 }
 
 TEST(SoftmaxTest, OneInput) {

@@ -1,23 +1,24 @@
-// Example to run two models with two Edge TPUs using two threads.
-// It depends only on tflite and edgetpu.h
-//
-// Example usage:
-// 1. Create directory edgetpu_cpp_example
-// 2. wget -O edgetpu_cpp_example/inat_bird_edgetpu.tflite \
-//      http://storage.googleapis.com/cloud-iot-edge-pretrained-models/canned_models/mobilenet_v2_1.0_224_inat_bird_quant_edgetpu.tflite
-// 3. wget -O edgetpu_cpp_example/inat_plant_edgetpu.tflite \
-//      http://storage.googleapis.com/cloud-iot-edge-pretrained-models/canned_models/mobilenet_v2_1.0_224_inat_plant_quant_edgetpu.tflite
-// 4. wget -O edgetpu_cpp_example/bird.jpg \
-//      https://farm3.staticflickr.com/8008/7523974676_40bbeef7e3_o.jpg
-// 5. wget -O edgetpu_cpp_example/plant.jpg \
-//      https://c2.staticflickr.com/1/62/184682050_db90d84573_o.jpg
-// 6. cd edgetpu_cpp_example && \
-//    convert bird.jpg -resize 224x224! bird.rgb && \
-//    convert plant.jpg -resize 224x224! plant.rgb
-// 7. Build and run `two_models_two_tpus_threaded`
-//
-// To reduce variation between different runs, one can disable CPU scaling with
-//   sudo cpupower frequency-set --governor performance
+/* Example to run two models with two Edge TPUs using two threads.
+ * It depends only on tflite and edgetpu.h
+ *
+ * Example usage:
+ * 1. Create directory edgetpu_cpp_example
+ * 2. wget -O edgetpu_cpp_example/inat_bird_edgetpu.tflite \
+ *      http://storage.googleapis.com/cloud-iot-edge-pretrained-models/canned_models/mobilenet_v2_1.0_224_inat_bird_quant_edgetpu.tflite
+ * 3. wget -O edgetpu_cpp_example/inat_plant_edgetpu.tflite \
+ *      http://storage.googleapis.com/cloud-iot-edge-pretrained-models/canned_models/mobilenet_v2_1.0_224_inat_plant_quant_edgetpu.tflite
+ * 4. wget -O edgetpu_cpp_example/bird.jpg \
+ *      https://farm3.staticflickr.com/8008/7523974676_40bbeef7e3_o.jpg
+ * 5. wget -O edgetpu_cpp_example/plant.jpg \
+ *      https://c2.staticflickr.com/1/62/184682050_db90d84573_o.jpg
+ * 6. cd edgetpu_cpp_example && \
+ *    convert bird.jpg -resize 224x224! bird.rgb && \
+ *    convert plant.jpg -resize 224x224! plant.rgb
+ * 7. Build and run `two_models_two_tpus_threaded`
+ *
+ * To reduce variation between different runs, one can disable CPU scaling with
+ *   sudo cpupower frequency-set --governor performance
+ */
 #include <chrono>  // NOLINT
 #include <iostream>
 #include <memory>

@@ -117,15 +117,16 @@ void ExtractModelSegmentAndVerify(
 }
 
 TEST(Utils, BuildEdgeList) {
-  //       | t0
-  //       0
-  // t1 /  |  \ t3
-  //   v   |t2 v
-  //   1   |   2
-  // t4 \  |  / t5
-  //     v v v
-  //       3
-  //       | t6
+  /*       | t0
+   *       0
+   * t1 /  |  \ t3
+   *   v   |t2 v
+   *   1   |   2
+   * t4 \  |  / t5
+   *     v v v
+   *       3
+   *       | t6
+   */
   const int num_tensors = 7;
   std::vector<std::unique_ptr<tflite::TensorT>> tensors;
   tensors.reserve(num_tensors);
@@ -181,13 +182,14 @@ TEST(Utils, BuildEdgeList) {
 }
 
 TEST(Utils, BuildGraph) {
-  //      0
-  //    / | \
-  //   v  |  v
-  //   1  |  2
-  //    \ | /
-  //     vvv
-  //      3
+  /*      0
+   *    / | \
+   *   v  |  v
+   *   1  |  2
+   *    \ | /
+   *     vvv
+   *      3
+   */
   std::vector<Edge> edges = {
       {0, 1}, {0, 2}, {0, 3}, {1, 3}, {2, 3},
   };
@@ -207,13 +209,14 @@ TEST(Utils, BuildGraph) {
 }
 
 TEST(Utils, BuildReverseGraph) {
-  //      0
-  //    / | \
-  //   v  |  v
-  //   1  |  2
-  //    \ | /
-  //     vvv
-  //      3
+  /*      0
+   *    / | \
+   *   v  |  v
+   *   1  |  2
+   *    \ | /
+   *     vvv
+   *      3
+   */
   std::vector<Edge> edges = {
       {0, 1}, {0, 2}, {0, 3}, {1, 3}, {2, 3},
   };
@@ -234,16 +237,17 @@ TEST(Utils, BuildReverseGraph) {
 }
 
 TEST(Utils, CalculateInDegree) {
-  //      0
-  //    /   \
-  //   v     v
-  //   1     2
-  //   |     |
-  //   v     v
-  //   4     5
-  //    \   /
-  //     v v
-  //      3
+  /*      0
+   *    /   \
+   *   v     v
+   *   1     2
+   *   |     |
+   *   v     v
+   *   4     5
+   *    \   /
+   *     v v
+   *      3
+   */
   const Graph graph = {
       {2, 1}, {4}, {5}, {}, {3}, {3},
   };
@@ -253,13 +257,14 @@ TEST(Utils, CalculateInDegree) {
 }
 
 TEST(Utils, TopologicalSort) {
-  //      0
-  //    / | \
-  //   v  |  v
-  //   1  |  2   4
-  //    \ |   \  /
-  //     vv    vv
-  //      3     5
+  /*      0
+   *    / | \
+   *   v  |  v
+   *   1  |  2   4
+   *    \ |   \  /
+   *     vv    vv
+   *      3     5
+   */
   const Graph graph = {
       {2, 1, 3}, {3}, {5}, {}, {5}, {},
   };
@@ -394,13 +399,14 @@ TEST(Utils, ExtractModelSegment_BottomSegment) {
                                target_inputs_str, target_outputs_str);
 }
 
-//          0
-//      /        \
-//      1        2
-//      |        |
-//      3        4
-//      \        /
-//          5
+/*          0
+ *      /        \
+ *      1        2
+ *      |        |
+ *      3        4
+ *      \        /
+ *          5
+ */
 // With num_nodes_per_subgraph = {2, 1, 3}
 //
 // This is a hard case, usually all of subgraph[i]'s output tensors can be
@@ -442,13 +448,14 @@ TEST(Utils, LocateSubgraphNodes_HardCase_SingleOpSubgraph) {
               testing::ContainerEq(expected_all_nodes[2]));
 }
 
-//      0
-//      |
-//      1
-//    / | \
-//   2  3  4
-//    \ | /
-//      5
+/*      0
+ *      |
+ *      1
+ *    / | \
+ *   2  3  4
+ *    \ | /
+ *      5
+ */
 // With num_nodes_per_subgraph = {2, 4}
 TEST(Utils, LocateSubgraphNodes_MultipleChildOps) {
   const std::vector<Edge> edge_list = {
@@ -479,9 +486,3 @@ TEST(Utils, LocateSubgraphNodes_MultipleChildOps) {
 }
 }  // namespace
 }  // namespace coral
-
-int main(int argc, char** argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  absl::ParseCommandLine(argc, argv);
-  return RUN_ALL_TESTS();
-}

@@ -1,0 +1,27 @@
+option(
+  'benchmarks',
+  type : 'feature',
+  value : 'enabled',
+  description : 'Build benchmarks',
+)
+
+option(
+  'dmabuf_tests',
+  type : 'feature',
+  value : 'enabled',
+  description : 'Build dmabuf tests',
+)
+
+option(
+  'examples',
+  type : 'feature',
+  value : 'enabled',
+  description : 'Build examples',
+)
+
+option(
+  'tests',
+  type : 'feature',
+  value : 'enabled',
+  description : 'Build tests',
+)

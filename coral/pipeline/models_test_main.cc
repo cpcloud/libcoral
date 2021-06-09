@@ -22,7 +22,7 @@
 #include "tensorflow/lite/model.h"
 #include "tflite/public/edgetpu.h"
 
-ABSL_FLAG(std::string, model_names, "", "Comma separated list of model names");
+ABSL_FLAG(std::string, model_names, "inception_v4_299_quant", "Comma separated list of model names");
 
 namespace coral {
 namespace {
@@ -38,8 +38,9 @@ static constexpr int kNumEdgeTpuAvailable = 4;
 std::vector<int> NumSegments() {
   // `result` looks like 2, 3, ..., kNumEdgeTpuAvailable.
   std::vector<int> result(kNumEdgeTpuAvailable - 1);
+  int n = 2;
   std::generate(result.begin(), result.end(),
-                [n = 2]() mutable { return n++; });
+                [&n]() mutable { return n++; });
   return result;
 }
 
