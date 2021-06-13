@@ -55,6 +55,8 @@ gmock = dependency('gmock', required : build_tests or build_dmabuf_tests)
 gtest = dependency('gtest', required : build_tests or build_dmabuf_tests)
 gtest_main = dependency('gtest_main', required : build_tests or build_dmabuf_tests)
 
+pkgconfig = import('pkgconfig')
+
 tensorflow_lite = dependency('tensorflow-lite')
 
 if build_tests or build_benchmarks

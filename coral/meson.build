@@ -654,7 +654,7 @@ coral_posenet_posenet_decoder_op = declare_dependency(
   ],
 )
 
-library(
+posenet_decoder_lib library(
   'posenet_decoder',
   'posenet/posenet_decoder_tflite_plugin.cc',
   dependencies : [
@@ -664,6 +664,8 @@ library(
   install : true,
 )
 
+pkgconfig.generate(posenet_decoder_lib)
+
 subdir('classification')
 subdir('detection')
 subdir('pipeline')
@@ -672,7 +674,7 @@ subdir('learn')
 subdir('tools')
 subdir('examples')
 
-library(
+coral_lib = library(
   'coral',
   dependencies : [
     coral_tflite_utils,
@@ -686,3 +688,5 @@ library(
   ],
   install : true,
 )
+
+pkgconfig.generate(coral_lib)
