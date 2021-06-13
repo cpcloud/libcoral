@@ -654,7 +654,7 @@ coral_posenet_posenet_decoder_op = declare_dependency(
   ],
 )
 
-posenet_decoder_lib library(
+posenet_decoder_lib = library(
   'posenet_decoder',
   'posenet/posenet_decoder_tflite_plugin.cc',
   dependencies : [
