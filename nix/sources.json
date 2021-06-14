@@ -1,14 +1,14 @@
 {
     "nixpkgs": {
-        "branch": "tflite-pkgconfig",
+        "branch": "libedgetpu",
         "description": "Nix Packages collection",
         "homepage": null,
         "owner": "cpcloud",
         "repo": "nixpkgs",
-        "rev": "80e8b600db918580d512429133fbc082ab708e94",
-        "sha256": "1npx36zbm9w6x9q6zcb7g9gc2rfcnv56bidhgnx67vbyfxfv7kyq",
+        "rev": "a5798e102e4a80f19c63959d4b77c735e12bc838",
+        "sha256": "1v9lh2l5nyxi64m05lj8rkqfnkqjz5nrzggl1r755qmd89rd7iiz",
         "type": "tarball",
-        "url": "https://github.com/cpcloud/nixpkgs/archive/80e8b600db918580d512429133fbc082ab708e94.tar.gz",
+        "url": "https://github.com/cpcloud/nixpkgs/archive/a5798e102e4a80f19c63959d4b77c735e12bc838.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
