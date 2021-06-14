@@ -51,6 +51,7 @@ stdenv.mkDerivation {
     "-Dtests=enabled"
     "-Dexamples=disabled"
     "-Dbenchmarks=disabled"
+    "-Dcpp_std=c++17"
   ];
 
   doCheck = true;
