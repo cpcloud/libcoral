@@ -27,6 +27,4 @@ pkgs.mkShell {
     gst-plugins-ugly
     gstreamer
   ]);
-
-  NIX_CFLAGS_COMPILE = "-fuse-ld=gold";
 }
