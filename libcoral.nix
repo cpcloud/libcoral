@@ -38,17 +38,13 @@ stdenv.mkDerivation {
     gtest
     glog
   ] ++ (with gst_all_1; [
-    gst-libav
-    gst-plugins-bad
     gst-plugins-base
-    gst-plugins-good
-    gst-plugins-ugly
     gstreamer
   ]);
 
   mesonFlags = [
     "--buildtype=release"
-    "-Dtests=enabled"
+    "-Dtests=cpu"
     "-Dexamples=disabled"
     "-Dbenchmarks=disabled"
     "-Dcpp_std=c++17"
@@ -57,7 +53,7 @@ stdenv.mkDerivation {
   doCheck = true;
 
   checkPhase = ''
-    meson test --suite=cpu
+    meson test
   '';
 
   src = ./.;
