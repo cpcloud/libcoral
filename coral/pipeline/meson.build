@@ -30,7 +30,7 @@ coral_pipeline_utils = declare_dependency(
   ],
 )
 
-if build_tests or build_benchmarks
+if build_pipelining_tests or build_benchmarks
   coral_pipeline_test_utils = declare_dependency(
     sources : [
       'test_utils.cc',
@@ -71,7 +71,7 @@ coral_pipeline_pipelined_model_runner = declare_dependency(
   ],
 )
 
-if build_tests
+if build_pipelining_tests
   test(
     'coral_pipeline_pipelined_model_runner_test',
     executable(

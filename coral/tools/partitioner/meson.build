@@ -65,7 +65,7 @@ coral_tools_partitioner_partitioner = declare_dependency(
   ],
 )
 
-if build_tests
+if build_edgetpu_tests or build_benchmarks
   coral_tools_partitioner_profiling_partition_util = declare_dependency(
     sources : [
       'profiling_partition_util.cc',
@@ -104,7 +104,7 @@ if build_benchmarks
   )
 endif
 
-if build_tests
+if build_edgetpu_tests
   test(
     'coral_tools_partitioner_partitioner_test',
     executable(

@@ -32,7 +32,7 @@ executable(
   install : true,
 )
 
-if build_benchmarks or build_tests
+if build_benchmarks
   coral_tools_model_pipelining_benchmark_util = declare_dependency(
     sources : [
       'model_pipelining_benchmark_util.cc',
@@ -53,9 +53,7 @@ if build_benchmarks or build_tests
       tensorflow_lite,
     ],
   )
-endif
 
-if build_benchmarks
   executable(
     'multiple_tpus_performance_analysis',
     'multiple_tpus_performance_analysis.cc',
@@ -92,7 +90,7 @@ if build_benchmarks
   )
 endif
 
-if build_tests
+if build_stress_tests
   test(
     'coral_tools_tflite_graph_util_test',
     executable(

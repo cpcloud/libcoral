@@ -41,7 +41,7 @@ coral_learn_imprinting_engine = declare_dependency(
   ],
 )
 
-if build_tests
+if build_edgetpu_tests
   test(
     'coral_learn_utils_test',
     executable(

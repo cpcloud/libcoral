@@ -44,7 +44,7 @@ coral_learn_backprop_softmax_regression_model = declare_dependency(
   ],
 )
 
-if build_tests
+if build_cpu_tests
   coral_learn_backprop_test_utils = declare_dependency(
     sources : [
       'test_utils.cc',

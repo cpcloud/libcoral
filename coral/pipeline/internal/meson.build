@@ -59,7 +59,7 @@ coral_pipeline_internal_segment_runner = declare_dependency(
   ],
 )
 
-if build_tests
+if build_cpu_tests
   test(
     'coral_pipeline_internal_memory_pool_allocator_test',
     executable(
@@ -75,7 +75,9 @@ if build_tests
     ),
     suite : 'cpu',
   )
+endif
 
+if build_edgetpu_tests
   test(
     'coral_pipeline_internal_segment_runner_test',
     executable(

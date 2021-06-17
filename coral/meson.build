@@ -167,7 +167,7 @@ if build_benchmarks
   )
 endif
 
-if build_tests
+if build_edgetpu_tests
   test(
     'coral_segmentation_models_test',
     executable(
@@ -191,17 +191,22 @@ if build_tests
   )
 
   test(
-    'coral_error_reporter_test',
+    'coral_test_utils_test',
     executable(
-      'coral_error_reporter_test',
-      'error_reporter_test.cc',
+      'coral_test_utils_test',
+      'test_utils_test.cc',
       dependencies : [
-        coral_error_reporter,
-        absl_memory,
-        gtest_main
-      ]
+        coral_test_data_images,
+        coral_test_main_with_edgetpu,
+        coral_test_utils,
+        coral_classification_adapter,
+        absl_strings,
+        gtest,
+        dl,
+      ],
     ),
-    suite : 'cpu',
+    is_parallel : false,
+    suite : 'edgetpu',
   )
 
   test(
@@ -225,7 +230,38 @@ if build_tests
     is_parallel : false,
     suite : 'edgetpu',
   )
+endif
 
+if build_cpu_tests
+  test(
+    'coral_error_reporter_test',
+    executable(
+      'coral_error_reporter_test',
+      'error_reporter_test.cc',
+      dependencies : [
+        coral_error_reporter,
+        absl_memory,
+        gtest_main
+      ]
+    ),
+    suite : 'cpu',
+  )
+
+  test(
+    'coral_bbox_test',
+    executable(
+      'coral_bbox_test',
+      'bbox_test.cc',
+      dependencies : [
+        coral_bbox,
+        gtest_main,
+      ],
+    ),
+    suite : 'cpu',
+  )
+endif
+
+if build_stress_tests
   test(
     'coral_model_loading_stress_test',
     executable(
@@ -292,38 +328,6 @@ if build_tests
     timeout : 0,
     is_parallel : false,
     suite : 'stress',
-  )
-
-  test(
-    'coral_bbox_test',
-    executable(
-      'coral_bbox_test',
-      'bbox_test.cc',
-      dependencies : [
-        coral_bbox,
-        gtest_main,
-      ],
-    ),
-    suite : 'cpu',
-  )
-
-  test(
-    'coral_test_utils_test',
-    executable(
-      'coral_test_utils_test',
-      'test_utils_test.cc',
-      dependencies : [
-        coral_test_data_images,
-        coral_test_main_with_edgetpu,
-        coral_test_utils,
-        coral_classification_adapter,
-        absl_strings,
-        gtest,
-        dl,
-      ],
-    ),
-    is_parallel : false,
-    suite : 'edgetpu',
   )
 endif
 
@@ -504,7 +508,7 @@ HEADERS = [
 
 install_headers(HEADERS, subdir : 'coral/posenet')
 
-if build_tests
+if build_edgetpu_tests
   coral_posenet_test_utils = declare_dependency(
     sources : [
       'posenet/test_utils.cc',

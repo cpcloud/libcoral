@@ -1,6 +1,6 @@
 install_headers('adapter.h', subdir : 'coral/detection')
 
-if build_tests
+if build_cpu_tests
   test(
     'coral_detection_adapter_test',
     executable(
@@ -20,7 +20,9 @@ if build_tests
     ),
     suite : 'cpu',
   )
+endif
 
+if build_edgetpu_tests
   test(
     'coral_detection_models_test',
     executable(

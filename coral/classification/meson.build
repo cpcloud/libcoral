@@ -1,6 +1,6 @@
 install_headers('adapter.h', subdir : 'coral/classification')
 
-if build_tests
+if build_cpu_tests
   test(
     'coral_classification_adapter_test',
     executable(
@@ -17,7 +17,9 @@ if build_tests
     ),
     suite : 'cpu',
   )
+endif
 
+if build_cpu_tests or build_edgetpu_tests
   CLASSIFICATION_MODEL_TEST_CASES = _COCOMPILED_MODEL_TEST_CASES + _INDIVIDUALLY_COMPILED_MODEL_TEST_CASES
 
   classification_model_test_cases_cpu_deps = []
@@ -71,7 +73,9 @@ if build_tests
       )
     endif
   endforeach
+endif
 
+if build_cpu_tests
   test(
     'coral_classification_models_cpu_test',
     executable(
@@ -86,7 +90,9 @@ if build_tests
     ),
     suite : 'cpu',
   )
+endif
 
+if build_edgetpu_tests
   test(
     'coral_classification_models_edgetpu_test',
     executable(

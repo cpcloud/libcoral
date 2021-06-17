@@ -32,9 +32,17 @@ absl_time = dependency('absl_time')
 absl_synchronization = dependency('absl_synchronization')
 
 build_benchmarks = get_option('benchmarks').enabled()
-build_dmabuf_tests = get_option('dmabuf_tests').enabled()
+
+test_suites = get_option('tests')
+
+build_tests = test_suites.length() != 0
+build_cpu_tests = test_suites.contains('cpu')
+build_dmabuf_tests = test_suites.contains('dmabuf')
+build_edgetpu_tests = test_suites.contains('edgetpu')
+build_pipelining_tests = test_suites.contains('pipelining')
+build_stress_tests = test_suites.contains('stress')
+
 build_examples = get_option('examples').enabled()
-build_tests = get_option('tests').enabled()
 
 dl = cxx.find_library('dl')
 
@@ -49,11 +57,13 @@ flatbuffers = dependency('flatbuffers')
 gstallocators = dependency('gstreamer-allocators-1.0', required : build_dmabuf_tests)
 gstreamer = dependency('gstreamer-1.0', required : build_dmabuf_tests)
 
-gbenchmark = dependency('benchmark', required : build_tests or build_dmabuf_tests or build_benchmarks)
+# gbenchmark is a transitiv dependency of some of the test suites
+gbenchmark = dependency('benchmark', required : build_benchmarks or build_tests)
+
 glog = dependency('glog')
-gmock = dependency('gmock', required : build_tests or build_dmabuf_tests)
-gtest = dependency('gtest', required : build_tests or build_dmabuf_tests)
-gtest_main = dependency('gtest_main', required : build_tests or build_dmabuf_tests)
+gmock = dependency('gmock', required : build_tests)
+gtest = dependency('gtest', required : build_tests)
+gtest_main = dependency('gtest_main', required : build_tests)
 
 pkgconfig = import('pkgconfig')
 

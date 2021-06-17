@@ -6,13 +6,6 @@ option(
 )
 
 option(
-  'dmabuf_tests',
-  type : 'feature',
-  value : 'enabled',
-  description : 'Build dmabuf tests',
-)
-
-option(
   'examples',
   type : 'feature',
   value : 'enabled',
@@ -21,7 +14,18 @@ option(
 
 option(
   'tests',
-  type : 'feature',
-  value : 'enabled',
+  type : 'array',
+  choices : [
+    'cpu',
+    'dmabuf',  # these tests can only be run on the coral dev board
+    'edgetpu',
+    'pipeline',
+    'stress',  # these tests take a very long time to run
+  ],
+  value : [
+    'cpu',
+    'edgetpu',
+    'pipeline',
+  ],
   description : 'Build tests',
 )
