@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <numeric>
+#include <iostream>
 #include <string>
 
 #include "coral/posenet/posenet_decoder.h"
@@ -53,6 +54,11 @@ void* Init(TfLiteContext* context, const char* buffer, size_t length) {
   op_data->score_threshold = m["score_threshold"].AsFloat();
   op_data->stride = m["stride"].AsInt32();
   op_data->nms_radius = m["nms_radius"].AsFloat();
+
+  std::cout << " max_detections: " << op_data->max_detections << std::endl;
+  std::cout << "score_threshold: " << op_data->score_threshold << std::endl;
+  std::cout << "         stride: " << op_data->stride << std::endl;
+  std::cout << "     nms_radius: " << op_data->nms_radius << std::endl;
 
   context->AddTensors(context, 1, &op_data->heatmaps_float_index);
   context->AddTensors(context, 1, &op_data->shorts_float_index);
@@ -276,6 +282,7 @@ TfLiteStatus Eval(TfLiteContext* context, TfLiteNode* node) {
       pose_scores_data);
 
   if (NumInputs(node) == 4) {
+    std::cout << "############### GOT 4 INPUTS ################" << std::endl;
     const TfLiteTensor* longs =
         GetInput(context, node, kInputTensorLongOffsets);
     TF_LITE_ENSURE(context, longs != nullptr);
