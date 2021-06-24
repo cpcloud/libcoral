@@ -2,6 +2,7 @@ HEADERS = [
   'common.h',
   'allocator.h',
   'utils.h',
+  'pipelined_model_runner.h'
 ]
 
 install_headers(HEADERS, subdir : 'coral/pipeline')
