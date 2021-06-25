@@ -2,6 +2,7 @@ HEADERS = [
   'aligned_alloc.h',
   'thread_safe_queue.h',
   'default_allocator.h',
+  'default_allocator_c.h',
   'memory_pool_allocator.h',
   'segment_runner.h',
 ]
@@ -26,6 +27,17 @@ coral_pipeline_internal_default_allocator = declare_dependency(
     coral_pipeline_allocator,
   ],
 )
+
+coral_pipeline_internal_default_allocator_c = declare_dependency(
+  sources : [
+    'default_allocator_c.h',
+    'default_allocator_c.cc',
+  ],
+  dependencies : [
+    coral_pipeline_allocator,
+  ],
+)
+
 
 coral_pipeline_internal_memory_pool_allocator = declare_dependency(
   sources : [
