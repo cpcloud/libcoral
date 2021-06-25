@@ -7,13 +7,16 @@
 extern "C" {
 #endif
 
+typedef struct CoralPipelinedModelRunner CoralPipelinedModelRunner;
 typedef struct CoralPipelineTensor CoralPipelineTensor;
-typedef struct CoralAllocator CoralAllocator;
 
-CoralPipelineTensor *CoralPipelineTensorCreate(CoralAllocator *allocator,
+CoralPipelineTensor *CoralPipelineTensorCreate(CoralPipelinedModelRunner *runner,
                                                size_t n, TfLiteType ty);
-void CoralPipelineTensorDestroy(CoralAllocator *allocator,
-                                CoralPipelineTensor *tensor);
+void CoralPipelineTensorDestroyWrapper(CoralPipelineTensor *tensor);
+void CoralPipelineTensorCopyFromBuffer(CoralPipelineTensor *tensor,
+                                       const char *buf, size_t n);
+void CoralPipelineTensorCopyToBuffer(const CoralPipelineTensor *tensor,
+                                     char *buf, size_t n);
 
 #ifdef __cplusplus
 }

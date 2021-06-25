@@ -1,11 +1,11 @@
 HEADERS = [
   'allocator.h',
-  'allocator_c_internal.h',
   'common.h',
   'common_c.h',
   'common_c_internal.h',
   'pipelined_model_runner.h',
   'pipelined_model_runner_c.h',
+  'pipelined_model_runner_c_internal.h',
   'utils.h',
 ]
 
@@ -16,7 +16,12 @@ coral_pipeline_allocator = declare_dependency(
 )
 
 coral_pipeline_common = declare_dependency(
-  sources : 'common.h',
+  sources : [
+    'common_c.cc',
+    'common_c.h',
+    'common_c_internal.h',
+    'common.h',
+  ],
   dependencies : [
     coral_pipeline_allocator,
     tensorflow_lite,
@@ -24,17 +29,6 @@ coral_pipeline_common = declare_dependency(
 )
 
 subdir('internal')
-
-coral_pipeline_common_c = declare_dependency(
-  sources : [
-    'common_c.cc',
-    'common_c.h',
-  ],
-  dependencies : [
-    coral_pipeline_internal_default_allocator_c,
-    tensorflow_lite,
-  ],
-)
 
 coral_pipeline_utils = declare_dependency(
   sources : [
@@ -44,8 +38,6 @@ coral_pipeline_utils = declare_dependency(
   dependencies : [
     coral_pipeline_allocator,
     coral_pipeline_common,
-    coral_pipeline_common_c,
-    coral_pipeline_internal_default_allocator_c,
     tensorflow_lite,
   ],
 )
@@ -73,35 +65,15 @@ coral_pipeline_pipelined_model_runner = declare_dependency(
   sources : [
     'pipelined_model_runner.cc',
     'pipelined_model_runner.h',
-  ],
-  dependencies : [
-    coral_pipeline_allocator,
-    coral_pipeline_common,
-    coral_pipeline_utils,
-    coral_pipeline_internal_default_allocator,
-    coral_pipeline_internal_default_allocator_c,
-    coral_pipeline_internal_memory_pool_allocator,
-    coral_pipeline_internal_segment_runner,
-    coral_pipeline_internal_thread_safe_queue,
-    absl_memory,
-    absl_synchronization,
-    glog,
-    tensorflow_lite,
-  ],
-)
-
-coral_pipeline_pipelined_model_runner_c = declare_dependency(
-  sources : [
     'pipelined_model_runner_c.cc',
     'pipelined_model_runner_c.h',
+    'pipelined_model_runner_c_internal.h',
   ],
   dependencies : [
     coral_pipeline_allocator,
     coral_pipeline_common,
-    coral_pipeline_common_c,
     coral_pipeline_utils,
     coral_pipeline_internal_default_allocator,
-    coral_pipeline_internal_default_allocator_c,
     coral_pipeline_internal_memory_pool_allocator,
     coral_pipeline_internal_segment_runner,
     coral_pipeline_internal_thread_safe_queue,
