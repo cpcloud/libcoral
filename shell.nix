@@ -1,24 +1,24 @@
 let
   pkgs = import ./nix;
 in
-pkgs.mkShell {
+(pkgs.stdenvAdapters.useGoldLinker pkgs.stdenv).mkDerivation {
   name = "libcoral";
   buildInputs = (with pkgs; [
-    niv
-    meson
-    pkg-config
-    fd
-    ninja
-    cmake
     abseil-cpp
+    cmake
     eigen
+    fd
     flatbuffers
-    tensorflow-lite
-    libedgetpu
-    gtest
+    gbenchmark
     glog
     gmock
-    gbenchmark
+    gtest
+    libedgetpu
+    meson
+    ninja
+    niv
+    pkg-config
+    tensorflow-lite
   ]) ++ (with pkgs.gst_all_1; [
     gst-libav
     gst-plugins-bad
