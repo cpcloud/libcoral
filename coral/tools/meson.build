@@ -32,61 +32,63 @@ executable(
   install : true,
 )
 
-coral_tools_model_pipelining_benchmark_util = declare_dependency(
-  sources : [
-    'model_pipelining_benchmark_util.cc',
-    'model_pipelining_benchmark_util.h',
-  ],
-  dependencies : [
-    coral_test_utils,
-    coral_tflite_utils,
-    coral_pipeline_common,
-    coral_pipeline_pipelined_model_runner,
-    coral_pipeline_test_utils,
-    coral_pipeline_utils,
-    absl_flags,
-    absl_flags_parse,
-    absl_strings,
-    glog,
-    edgetpu,
-    tensorflow_lite,
-  ],
-)
+if build_benchmarks
+  coral_tools_model_pipelining_benchmark_util = declare_dependency(
+    sources : [
+      'model_pipelining_benchmark_util.cc',
+      'model_pipelining_benchmark_util.h',
+    ],
+    dependencies : [
+      coral_test_utils,
+      coral_tflite_utils,
+      coral_pipeline_common,
+      coral_pipeline_pipelined_model_runner,
+      coral_pipeline_test_utils,
+      coral_pipeline_utils,
+      absl_flags,
+      absl_flags_parse,
+      absl_strings,
+      glog,
+      edgetpu,
+      tensorflow_lite,
+    ],
+  )
 
-executable(
-  'multiple_tpus_performance_analysis',
-  'multiple_tpus_performance_analysis.cc',
-  dependencies : [
-    coral_test_data_images,
-    coral_test_data_models,
-    coral_test_utils,
-    coral_tflite_utils,
-    absl_flags,
-    absl_flags_parse,
-    absl_status,
-    absl_span,
-    glog,
-    edgetpu,
-    dl,
-  ],
-  install : true,
-)
+  executable(
+    'multiple_tpus_performance_analysis',
+    'multiple_tpus_performance_analysis.cc',
+    dependencies : [
+      coral_test_data_images,
+      coral_test_data_models,
+      coral_test_utils,
+      coral_tflite_utils,
+      absl_flags,
+      absl_flags_parse,
+      absl_status,
+      absl_span,
+      glog,
+      edgetpu,
+      dl,
+    ],
+    install : true,
+  )
 
-executable(
-  'model_pipelining_performance_analysis',
-  'model_pipelining_performance_analysis.cc',
-  dependencies : [
-    coral_tools_model_pipelining_benchmark_util,
-    coral_pipeline_test_utils,
-    absl_node_hash_map,
-    absl_flags,
-    absl_flags_parse,
-    glog,
-    edgetpu,
-    dl,
-  ],
-  install : true,
-)
+  executable(
+    'model_pipelining_performance_analysis',
+    'model_pipelining_performance_analysis.cc',
+    dependencies : [
+      coral_tools_model_pipelining_benchmark_util,
+      coral_pipeline_test_utils,
+      absl_node_hash_map,
+      absl_flags,
+      absl_flags_parse,
+      glog,
+      edgetpu,
+      dl,
+    ],
+    install : true,
+  )
+endif
 
 if build_stress_tests
   test(

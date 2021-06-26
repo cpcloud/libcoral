@@ -65,40 +65,42 @@ coral_tools_partitioner_partitioner = declare_dependency(
   ],
 )
 
-coral_tools_partitioner_profiling_partition_util = declare_dependency(
-  sources : [
-    'profiling_partition_util.cc',
-    'profiling_partition_util.h',
-  ],
-  dependencies : [
-    coral_tools_partitioner_strategy,
-    coral_tools_partitioner_utils,
-    coral_pipeline_test_utils,
-    coral_tools_model_pipelining_benchmark_util,
-    absl_flat_hash_map,
-    absl_strings,
-    glog,
-    tensorflow_lite,
-  ],
-)
+if build_benchmarks
+  coral_tools_partitioner_profiling_partition_util = declare_dependency(
+    sources : [
+      'profiling_partition_util.cc',
+      'profiling_partition_util.h',
+    ],
+    dependencies : [
+      coral_tools_partitioner_strategy,
+      coral_tools_partitioner_utils,
+      coral_pipeline_test_utils,
+      coral_tools_model_pipelining_benchmark_util,
+      absl_flat_hash_map,
+      absl_strings,
+      glog,
+      tensorflow_lite,
+    ],
+  )
 
-executable(
-  'profiling_partitioner',
-  'profiling_partitioner.cc',
-  dependencies : [
-    coral_tools_partitioner_profiling_partition_util,
-    coral_tools_partitioner_strategy,
-    coral_tools_partitioner_utils,
-    coral_tools_model_pipelining_benchmark_util,
-    absl_flags,
-    absl_flags_parse,
-    absl_strings,
-    glog,
-    edgetpu,
-    dl,
-  ],
-  install : true,
-)
+  executable(
+    'profiling_partitioner',
+    'profiling_partitioner.cc',
+    dependencies : [
+      coral_tools_partitioner_profiling_partition_util,
+      coral_tools_partitioner_strategy,
+      coral_tools_partitioner_utils,
+      coral_tools_model_pipelining_benchmark_util,
+      absl_flags,
+      absl_flags_parse,
+      absl_strings,
+      glog,
+      edgetpu,
+      dl,
+    ],
+    install : true,
+  )
+endif
 
 if build_edgetpu_tests
   test(

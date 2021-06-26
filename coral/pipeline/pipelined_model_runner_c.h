@@ -10,6 +10,11 @@ extern "C" {
 typedef struct CoralPipelinedModelRunner CoralPipelinedModelRunner;
 typedef struct CoralPipelineTensor CoralPipelineTensor;
 
+typedef struct CoralSegmentStats {
+  int64_t total_time_ns;
+  uint64_t num_inferences;
+} CoralSegmentStats;
+
 CoralPipelinedModelRunner *
 CoralPipelinedModelRunnerCreate(TfLiteInterpreter **interpreters, size_t n);
 void CoralPipelinedModelRunnerDestroy(CoralPipelinedModelRunner *runner);
@@ -17,6 +22,14 @@ bool CoralPipelinedModelRunnerPush(CoralPipelinedModelRunner *runner,
                                    CoralPipelineTensor **tensors, size_t n);
 bool CoralPipelinedModelRunnerPop(CoralPipelinedModelRunner *runner,
                                   CoralPipelineTensor **raw_tensors, size_t *n);
+void CoralPipelinedModelRunnerSetInputQueueSize(
+    CoralPipelinedModelRunner *runner, size_t input_queue_size);
+void CoralPipelinedModelRunnerSetOutputQueueSize(
+    CoralPipelinedModelRunner *runner, size_t output_queue_size);
+CoralSegmentStats *CoralPipelinedModelRunnerGetSegmentStats(
+    const CoralPipelinedModelRunner *runner, size_t *n);
+void CoralPipelinedModelRunnerDestroySegmentStats(
+    CoralSegmentStats *segment_stats);
 
 #ifdef __cplusplus
 }
