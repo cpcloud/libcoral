@@ -28,8 +28,6 @@ coral_pipeline_common = declare_dependency(
   ],
 )
 
-subdir('internal')
-
 coral_pipeline_utils = declare_dependency(
   sources : [
     'utils.cc',
@@ -42,7 +40,7 @@ coral_pipeline_utils = declare_dependency(
   ],
 )
 
-if build_pipelining_tests or build_benchmarks
+if build_edgetpu_tests or build_pipeline_tests or build_benchmarks
   coral_pipeline_test_utils = declare_dependency(
     sources : [
       'test_utils.cc',
@@ -60,6 +58,8 @@ if build_pipelining_tests or build_benchmarks
     ],
   )
 endif
+
+subdir('internal')
 
 coral_pipeline_pipelined_model_runner = declare_dependency(
   sources : [
@@ -84,7 +84,7 @@ coral_pipeline_pipelined_model_runner = declare_dependency(
   ],
 )
 
-if build_pipelining_tests
+if build_pipeline_tests
   test(
     'coral_pipeline_pipelined_model_runner_test',
     executable(

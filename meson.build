@@ -39,7 +39,7 @@ build_tests = test_suites.length() != 0
 build_cpu_tests = test_suites.contains('cpu')
 build_dmabuf_tests = test_suites.contains('dmabuf')
 build_edgetpu_tests = test_suites.contains('edgetpu')
-build_pipelining_tests = test_suites.contains('pipelining')
+build_pipeline_tests = test_suites.contains('pipeline')
 build_stress_tests = test_suites.contains('stress')
 
 build_examples = get_option('examples').enabled()
