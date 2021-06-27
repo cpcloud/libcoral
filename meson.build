@@ -7,12 +7,17 @@ project(
   ],
 )
 
-add_project_arguments(
-  [
-    '-Wno-sign-compare',
-  ],
-  language : 'cpp',
-)
+build_type = get_variable('buildtype')
+
+project_arguments = [
+  '-Wno-sign-compare',
+]
+
+if build_type == 'debug'
+  project_arguments += '-ggdb'
+endif
+
+add_project_arguments(project_arguments, language : 'cpp')
 
 cxx = meson.get_compiler('cpp')
 
