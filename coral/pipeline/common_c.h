@@ -12,15 +12,15 @@ typedef struct CoralPipelinedModelRunner CoralPipelinedModelRunner;
 typedef struct CoralPipelineTensor CoralPipelineTensor;
 
 CoralPipelineTensor *
-CoralPipelineTensorCreate(CoralPipelinedModelRunner *runner, size_t n,
+CoralPipelineTensorCreate(CoralPipelinedModelRunner *runner, size_t bytes,
                           TfLiteType type);
 void CoralPipelineInputTensorDestroy(CoralPipelineTensor *tensor);
 void CoralPipelineOutputTensorDestroy(CoralPipelinedModelRunner *runner,
                                       CoralPipelineTensor *tensor);
 void CoralPipelineTensorCopyFromBuffer(CoralPipelineTensor *tensor,
-                                       const char *buf, size_t n);
+                                       const char *buf, size_t bytes);
 void CoralPipelineTensorCopyToBuffer(const CoralPipelineTensor *tensor,
-                                     char *buf, size_t n);
+                                     char *buf, size_t bytes);
 
 #ifdef __cplusplus
 }
