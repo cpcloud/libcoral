@@ -7,7 +7,7 @@ project(
   ],
 )
 
-build_type = get_variable('buildtype')
+build_type = get_option('buildtype')
 
 project_arguments = [
   '-Wno-sign-compare',
