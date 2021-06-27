@@ -218,8 +218,11 @@ std::vector<SegmentStats> PipelinedModelRunner::GetSegmentStats() const {
 }
 
 std::vector<std::size_t> PipelinedModelRunner::GetQueueSizes() const {
-  std::vector<std::size_t> result(num_segments_);
-  for (int i = 0; i < num_segments_; ++i) {
+  const auto n = queues_.size();
+  std::vector<std::size_t> result;
+  result.reserve(n);
+
+  for (int i = 0; i < n; ++i) {
     result[i] = queues_[i].size();
   }
   return result;
