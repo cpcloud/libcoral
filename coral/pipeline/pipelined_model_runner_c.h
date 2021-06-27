@@ -33,6 +33,11 @@ CoralSegmentStats *CoralPipelinedModelRunnerGetSegmentStats(
 void CoralPipelinedModelRunnerDestroySegmentStats(
     CoralSegmentStats *segment_stats);
 
+size_t *
+CoralPipelinedModelRunnerGetQueueSizes(const CoralPipelinedModelRunner *runner,
+                                       size_t *n);
+void CoralPipelinedModelRunnerDestroyQueueSizes(size_t *n);
+
 #ifdef __cplusplus
 }
 #endif

@@ -106,6 +106,21 @@ void CoralPipelinedModelRunnerDestroySegmentStats(
   delete[] CHECK_NOTNULL(segment_stats);
 }
 
+size_t *
+CoralPipelinedModelRunnerGetQueueSizes(const CoralPipelinedModelRunner *runner,
+                                       size_t *n) {
+  const auto queue_sizes =
+      CHECK_NOTNULL(CHECK_NOTNULL(runner)->runner)->GetQueueSizes();
+  *CHECK_NOTNULL(n) = queue_sizes.size();
+  auto result = new size_t[*n];
+  std::copy_n(queue_sizes.cbegin(), *n, result);
+  return result;
+}
+
+void CoralPipelinedModelRunnerDestroyQueueSizes(size_t *queue_sizes) {
+  delete[] CHECK_NOTNULL(queue_sizes);
+}
+
 #ifdef __cplusplus
 }
 #endif

@@ -190,6 +190,9 @@ class PipelinedModelRunner {
   //      empty push is received.
   bool Pop(std::vector<PipelineTensor>* output_tensors);
 
+  // Return the size of each model segments queue.
+  std::vector<std::size_t> GetQueueSizes() const;
+
   // Returns performance stats for each segment.
   std::vector<SegmentStats> GetSegmentStats() const;
 

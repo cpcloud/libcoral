@@ -216,4 +216,12 @@ std::vector<SegmentStats> PipelinedModelRunner::GetSegmentStats() const {
   }
   return result;
 }
+
+std::vector<std::size_t> PipelinedModelRunner::GetQueueSizes() const {
+  std::vector<std::size_t> result(num_segments_);
+  for (int i = 0; i < num_segments_; ++i) {
+    result[i] = queues_[i].size();
+  }
+  return result;
+}
 }  // namespace coral
