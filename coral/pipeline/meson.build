@@ -1,11 +1,7 @@
 HEADERS = [
   'allocator.h',
   'common.h',
-  'common_c.h',
-  'common_c_internal.h',
   'pipelined_model_runner.h',
-  'pipelined_model_runner_c.h',
-  'pipelined_model_runner_c_internal.h',
   'utils.h',
 ]
 
@@ -17,9 +13,6 @@ coral_pipeline_allocator = declare_dependency(
 
 coral_pipeline_common = declare_dependency(
   sources : [
-    'common_c.cc',
-    'common_c.h',
-    'common_c_internal.h',
     'common.h',
   ],
   dependencies : [
@@ -65,9 +58,6 @@ coral_pipeline_pipelined_model_runner = declare_dependency(
   sources : [
     'pipelined_model_runner.cc',
     'pipelined_model_runner.h',
-    'pipelined_model_runner_c.cc',
-    'pipelined_model_runner_c.h',
-    'pipelined_model_runner_c_internal.h',
   ],
   dependencies : [
     coral_pipeline_allocator,
