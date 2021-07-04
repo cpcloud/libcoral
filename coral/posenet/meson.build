@@ -168,8 +168,8 @@ coral_posenet_decoder_lib = declare_dependency(
     dependencies : [
       coral_posenet_posenet_decoder_op,
       tensorflow_lite,
-      ],
+    ],
     install : true,
+    implicit_include_directories : false,
   ),
-  implicit_include_directories : false,
 )
