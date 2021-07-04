@@ -96,3 +96,15 @@ if build_edgetpu_tests
 endif
 
 subdir('backprop')
+
+coral_learn_lib = library(
+  'coral_learn',
+  dependencies : [
+    coral_learn_backprop_softmax_regression_model,
+    coral_learn_imprinting_engine,
+    dl,
+  ],
+  install : true,
+)
+
+pkgconfig.generate(coral_learn_lib)

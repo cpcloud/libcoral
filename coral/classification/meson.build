@@ -1,4 +1,22 @@
-install_headers('adapter.h', subdir : 'coral/classification')
+HEADERS = [
+  'adapter.h',
+]
+install_headers(HEADERS, subdir : 'coral/classification')
+
+coral_classification_adapter = declare_dependency(
+  sources : [
+    'adapter.cc',
+    'adapter.h',
+  ],
+  dependencies : [
+    coral_tflite_utils,
+    absl_strings,
+    absl_span,
+    glog,
+    tensorflow_lite,
+  ],
+  include_directories : include_directories('../..'),
+)
 
 if build_cpu_tests
   test(
@@ -109,3 +127,14 @@ if build_edgetpu_tests
     suite : 'edgetpu',
   )
 endif
+
+coral_classification_lib = library(
+  'coral_classification',
+  dependencies : [
+    coral_classification_adapter,
+    dl,
+  ],
+  install : true,
+)
+
+pkgconfig.generate(coral_classification_lib)
