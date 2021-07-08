@@ -1,10 +1,16 @@
 let
   pkgs = import ./nix;
+  bintools_lld = pkgs.wrapBintoolsWith {
+    bintools = pkgs.llvmPackages_12.bintools;
+  };
 in
-(pkgs.stdenvAdapters.useGoldLinker pkgs.stdenv).mkDerivation {
+pkgs.llvmPackages_12.stdenv.mkDerivation {
   name = "libcoral";
   buildInputs = (with pkgs; [
+    stdenv
+    bintools_lld
     abseil-cpp
+    clang-tools
     cmake
     eigen
     fd
@@ -26,5 +32,9 @@ in
     gst-plugins-good
     gst-plugins-ugly
     gstreamer
+  ]) ++ (with pkgs.llvmPackages_12; [
+    clang
+    lld
   ]);
+  NIX_CFLAGS_LINK = "-fuse-ld=lld";
 }
