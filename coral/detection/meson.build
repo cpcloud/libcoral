@@ -24,7 +24,7 @@ if build_cpu_tests
         gtest,
         glog,
         dl,
-        gmock
+        gmock,
       ],
     ),
     suite : 'cpu',
