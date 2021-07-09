@@ -1,23 +1,3 @@
-HEADERS = [
-  'adapter.h',
-]
-install_headers(HEADERS, subdir : 'coral/classification')
-
-coral_classification_adapter = declare_dependency(
-  sources : [
-    'adapter.cc',
-    'adapter.h',
-  ],
-  dependencies : [
-    coral_tflite_utils,
-    absl_strings,
-    absl_span,
-    glog,
-    tensorflow_lite,
-  ],
-  include_directories : include_directories('../..'),
-)
-
 if build_cpu_tests
   test(
     'coral_classification_adapter_test',

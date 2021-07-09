@@ -1,23 +1,3 @@
-HEADERS = [
-  'adapter.h',
-]
-install_headers(HEADERS, subdir : 'coral/detection')
-
-coral_detection_adapter = declare_dependency(
-  sources : [
-    'adapter.cc',
-    'adapter.h',
-  ],
-  dependencies : [
-    coral_bbox,
-    coral_tflite_utils,
-    absl_strings,
-    absl_span,
-    glog,
-    tensorflow_lite,
-  ],
-)
-
 coral_detection_lib = library(
   'coral_detection',
   dependencies : [
