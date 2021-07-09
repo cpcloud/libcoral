@@ -138,7 +138,7 @@ TEST_P(ParameterCountBasedPartitionerTest, CheckPartitionQuality) {
   }
 }
 
-INSTANTIATE_TEST_CASE_P(ParameterCountBasedPartitionerTest,
+INSTANTIATE_TEST_SUITE_P(ParameterCountBasedPartitionerTest,
                         ParameterCountBasedPartitionerTest,
                         ::testing::Combine(::testing::ValuesIn(ModelNames()),
                                            ::testing::Values(2, 3, 4)));

@@ -42,8 +42,8 @@ TEST_P(DetectionModelTest, TestFineTunedPetModel) {
                 /*iou_threshold=*/0.81);
 }
 
-INSTANTIATE_TEST_CASE_P(DetectionCpuModelTest, DetectionModelTest,
+INSTANTIATE_TEST_SUITE_P(DetectionCpuModelTest, DetectionModelTest,
                         ::testing::Values(".tflite"));
-INSTANTIATE_TEST_CASE_P(DetectionEdgeTpuModelTest, DetectionModelTest,
+INSTANTIATE_TEST_SUITE_P(DetectionEdgeTpuModelTest, DetectionModelTest,
                         ::testing::Values("_edgetpu.tflite"));
 }  // namespace coral

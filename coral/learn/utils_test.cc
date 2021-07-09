@@ -498,9 +498,9 @@ TEST_P(UtilsRealModelTest, AppendFullyConnectedAndSoftmaxLayerToModel) {
       GenerateModelPath("efficientnet-edgetpu-S_quant_embedding_extractor")));
 }
 
-INSTANTIATE_TEST_CASE_P(UtilsRealCpuModelTest, UtilsRealModelTest,
+INSTANTIATE_TEST_SUITE_P(UtilsRealCpuModelTest, UtilsRealModelTest,
                         ::testing::Values(".tflite"));
-INSTANTIATE_TEST_CASE_P(UtilsRealEdgeTpuModelTest, UtilsRealModelTest,
+INSTANTIATE_TEST_SUITE_P(UtilsRealEdgeTpuModelTest, UtilsRealModelTest,
                         ::testing::Values("_edgetpu.tflite"));
 
 }  // namespace

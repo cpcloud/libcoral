@@ -264,7 +264,7 @@ TEST_P(PipelinedModelRunnerModelsTest, RepeatabilityTest) {
   }
 }
 
-INSTANTIATE_TEST_CASE_P(PipelinedModelRunnerModelsTest,
+INSTANTIATE_TEST_SUITE_P(PipelinedModelRunnerModelsTest,
                         PipelinedModelRunnerModelsTest,
                         ::testing::ValuesIn(NumSegments()));
 

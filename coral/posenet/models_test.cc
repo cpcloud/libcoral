@@ -46,9 +46,9 @@ TEST_P(PosenetModelTest, TestPoseNetWithDecoder_721_1281) {
       "posenet_mobilenet_v1_075_721_1281_quant_decoder" + GetParam(), 0.7);
 }
 
-INSTANTIATE_TEST_CASE_P(PosenetModelCpuTest, PosenetModelTest,
+INSTANTIATE_TEST_SUITE_P(PosenetModelCpuTest, PosenetModelTest,
                         ::testing::Values(".tflite"));
-INSTANTIATE_TEST_CASE_P(PosenetModelEdgeTpuTest, PosenetModelTest,
+INSTANTIATE_TEST_SUITE_P(PosenetModelEdgeTpuTest, PosenetModelTest,
                         ::testing::Values("_edgetpu.tflite"));
 
 }  // namespace

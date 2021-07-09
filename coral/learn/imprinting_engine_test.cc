@@ -309,7 +309,7 @@ TEST_P(ImprintingEngineTest,
                           {"dog_test_0.bmp", 1, 0.99f}});
 }
 
-INSTANTIATE_TEST_CASE_P(ImprintingEngineTest, ImprintingEngineTest,
+INSTANTIATE_TEST_SUITE_P(ImprintingEngineTest, ImprintingEngineTest,
                         ::testing::Values(false, true));
 
 }  // namespace coral
