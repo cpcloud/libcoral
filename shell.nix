@@ -19,12 +19,14 @@ pkgs.llvmPackages_12.stdenv.mkDerivation {
     glog
     gmock
     gtest
+    libusb
     libedgetpu
     meson
     ninja
     niv
     pkg-config
     tensorflow-lite
+    xxd
   ]) ++ (with pkgs.gst_all_1; [
     gst-libav
     gst-plugins-bad
