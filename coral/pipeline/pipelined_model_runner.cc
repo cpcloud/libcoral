@@ -1,5 +1,6 @@
 #include "coral/pipeline/pipelined_model_runner.h"
 
+#include <algorithm>
 #include <thread>  // NOLINT
 #include <unordered_map>
 #include <unordered_set>
@@ -211,19 +212,28 @@ bool PipelinedModelRunner::ShutdownPipeline() {
 
 std::vector<SegmentStats> PipelinedModelRunner::GetSegmentStats() const {
   std::vector<SegmentStats> result(num_segments_);
-  for (int i = 0; i < num_segments_; ++i) {
-    result[i] = segments_runners_[i]->stats();
-  }
+  std::transform(segments_runners_.cbegin(), segments_runners_.cend(),
+                 result.begin(),
+                 [](const std::unique_ptr<internal::SegmentRunner> &runner) {
+                   return runner->stats();
+                 });
   return result;
 }
 
-std::vector<std::size_t> PipelinedModelRunner::GetQueueSizes() const {
-  const auto n = queues_.size();
-  std::vector<std::size_t> result(n);
+std::size_t PipelinedModelRunner::GetOutputQueueSize() const {
+  return queues_.back().size();
+}
 
-  for (int i = 0; i < n; ++i) {
-    result[i] = queues_[i].size();
-  }
+std::size_t PipelinedModelRunner::GetInputQueueSize() const {
+  return queues_.front().size();
+}
+
+std::vector<std::size_t> PipelinedModelRunner::GetQueueSizes() const {
+  std::vector<std::size_t> result(queues_.size());
+  std::transform(queues_.cbegin(), queues_.cend(), result.begin(),
+                 [](const internal::WaitQueue<internal::TensorMap> &queue) {
+                   return queue.size();
+                 });
   return result;
 }
 }  // namespace coral

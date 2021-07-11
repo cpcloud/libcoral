@@ -193,6 +193,12 @@ class PipelinedModelRunner {
   // Return the size of each model segments queue.
   std::vector<std::size_t> GetQueueSizes() const;
 
+  // Return the size of the output queue (the last queue).
+  std::size_t GetOutputQueueSize() const;
+
+  // Return the size of the input queue (the last queue).
+  std::size_t GetInputQueueSize() const;
+
   // Returns performance stats for each segment.
   std::vector<SegmentStats> GetSegmentStats() const;
 
